@@ -13,10 +13,12 @@ import {
   MessageCircle,
   Menu,
   X,
-  Quote,
   CheckCircle,
   User,
   Star,
+  Trophy,
+  Award,
+  Target,
 } from "lucide-react";
 
 function Navigation() {
@@ -42,8 +44,8 @@ function Navigation() {
   const navLinks = [
     { label: "Home", id: "hero" },
     { label: "About", id: "about" },
+    { label: "Achievements", id: "achievements" },
     { label: "Services", id: "services" },
-    { label: "Testimonials", id: "testimonials" },
     { label: "Contact", id: "contact" },
   ];
 
@@ -376,67 +378,95 @@ function ServicesSection() {
   );
 }
 
-function TestimonialsSection() {
-  const testimonials = [
+function AchievementsSection() {
+  const achievements = [
     {
-      quote:
-        "My daughter went from struggling with math to actually enjoying it. The improvement in her confidence has been remarkable. She now looks forward to her tutoring sessions!",
-      name: "Sarah M.",
-      context: "Parent of 8th grader",
+      icon: Trophy,
+      score: "1580",
+      label: "SAT Score",
+      description: "99th percentile nationwide",
     },
     {
-      quote:
-        "The test prep sessions were incredibly helpful. My SAT score improved by 200 points, and I got into my first-choice college. I couldn't have done it without this support.",
-      name: "Michael T.",
-      context: "High School Senior",
+      icon: Award,
+      score: "36",
+      label: "ACT Score",
+      description: "Perfect composite score",
     },
     {
-      quote:
-        "Patient, knowledgeable, and genuinely caring. Our tutor made all the difference during a challenging school year. My son's grades have improved dramatically.",
-      name: "Jennifer L.",
-      context: "Parent of 5th grader",
+      icon: GraduationCap,
+      score: "4.0",
+      label: "GPA",
+      description: "Summa Cum Laude graduate",
+    },
+    {
+      icon: Target,
+      score: "5",
+      label: "AP Scores",
+      description: "Perfect scores in 8 AP exams",
     },
   ];
 
+  const credentials = [
+    "Master of Education (M.Ed.) - Curriculum & Instruction",
+    "Bachelor of Science in Mathematics - Magna Cum Laude",
+    "State Teaching Certification - Secondary Education",
+    "National Board Certified Teacher",
+    "College Board Certified AP Instructor",
+    "Honors Society Member - Phi Beta Kappa",
+  ];
+
   return (
-    <section id="testimonials" className="py-20 lg:py-28 bg-muted/30">
+    <section id="achievements" className="py-20 lg:py-28 bg-background">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-            What Families Say
+            Academic Achievements
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Real stories from parents and students who have experienced the
-            difference personalized tutoring can make.
+            Proven academic excellence and credentials that demonstrate my
+            commitment to education and student success.
           </p>
         </div>
 
-        <div className="mt-12 grid md:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, index) => (
+        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {achievements.map((achievement, index) => (
             <Card
               key={index}
-              className="p-6 border border-card-border bg-card"
-              data-testid={`card-testimonial-${index}`}
+              className="p-6 border border-card-border bg-card text-center"
+              data-testid={`card-achievement-${index}`}
             >
-              <Quote className="h-8 w-8 text-accent/40" />
-              <blockquote className="mt-4 text-muted-foreground italic leading-relaxed">
-                "{testimonial.quote}"
-              </blockquote>
-              <div className="mt-6 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
-                  <User className="h-5 w-5 text-muted-foreground" />
-                </div>
-                <div>
-                  <p className="font-semibold text-foreground">
-                    {testimonial.name}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {testimonial.context}
-                  </p>
-                </div>
+              <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
+                <achievement.icon className="h-7 w-7 text-accent" />
               </div>
+              <div className="mt-4 text-4xl font-bold text-accent">
+                {achievement.score}
+              </div>
+              <h3 className="mt-2 text-lg font-semibold text-foreground">
+                {achievement.label}
+              </h3>
+              <p className="mt-1 text-sm text-muted-foreground">
+                {achievement.description}
+              </p>
             </Card>
           ))}
+        </div>
+
+        <div className="mt-16">
+          <h3 className="text-2xl font-bold text-foreground text-center mb-8">
+            Credentials & Certifications
+          </h3>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {credentials.map((credential, index) => (
+              <div
+                key={index}
+                className="flex items-center gap-3 bg-muted/50 rounded-lg p-4"
+                data-testid={`credential-${index}`}
+              >
+                <CheckCircle className="h-5 w-5 text-accent flex-shrink-0" />
+                <span className="text-sm text-foreground">{credential}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -536,8 +566,8 @@ export default function Home() {
       <main>
         <HeroSection />
         <AboutSection />
+        <AchievementsSection />
         <ServicesSection />
-        <TestimonialsSection />
         <ContactSection />
       </main>
       <Footer />
